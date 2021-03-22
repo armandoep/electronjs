@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <title>Add Products</title>
+</head>
+<body>
+    <div class="container">
+      <h1>Add new product</h1>
+        <form>
+          <div class="mb-3">
+            <label for="inputID" class="form-label">ID</label>
+            <input type="text" disabled class="form-control" id="inputID" >
+          </div>
+            <div class="mb-3">
+              <label for="inputName" class="form-label">Name</label>
+              <input type="text" autofocus class="form-control" id="inputName" >
+            </div>
+            <div class="mb-3">
+                <label for="inputDescription" class="form-label">Description</label>
+                <textarea type="text" class="form-control" id="inputDescription"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="selectCategory">Category</label>
+              <select class="form-select" aria-label="Categories" id="selectCategory">
+                <option selected>Fruits and vegetables</option>
+                <option>Bakery and Sweets</option>
+                <option>Eggs, Dairy and Coffee</option>
+                <option>Oil, Pasta and Legumes</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="inputQuantity" class="form-label">Quantity</label>
+              <input type="number" class="form-control" id="inputQuantity">
+            </div>
+            <button type="submit" id="btnAdd" class="btn btn-primary">Save</button>
+            <button type="button" id="btnClose" class="btn btn-danger">Cancel</button>
+          </form>
+    </div>
+
+    <script src="./agregarProductos.js"></script>
+</body>
+</html>
