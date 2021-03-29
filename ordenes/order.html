@@ -21,25 +21,20 @@
                 <input type="text" disabled class="form-control" id="inputID">
               </div>
             <div class="mb-3">
-              <label for="inputName" class="form-label">Name</label>
-              <input type="text" autofocus class="form-control" id="inputName">
-            </div>
-            <div class="mb-3">
-                <label for="inputDescription" class="form-label">Description</label>
-                <textarea type="text" class="form-control" id="inputDescription"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="selectProvider">Provider</label>
-              <select class="form-select" id="selectProvider" aria-label="Providers">
-                <option selected>First Provider</option>
-                <option>Second Provider</option>
-                <option>Third Provider</option>
-                <option>Fourth Provider</option>
+              <label for="selectProduct" class="form-label">Products</label> <br />
+              <select class="form-select" style="width: 43rem;" id="selectProduct" aria-label="Products" required>
+               <option selected>No selection</option>
               </select>
             </div>
             <div class="mb-3">
+                <label for="selectProvider">Provider</label> <br />
+                <select class="form-select" style="width: 43rem;" id="selectProvider" aria-label="Providers" required>
+                  <option selected>No selection</option>
+                </select>
+            </div>
+            <div class="mb-3">
               <label for="inputQuantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" id="inputQuantity">
+              <input type="number" class="form-control" id="inputQuantity" required>
             </div>
             <button type="submit" id="btnAdd" class="btn btn-primary">Order</button>
             <button type="button" id="btnClose" class="btn btn-danger">Cancel</button>

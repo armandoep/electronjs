@@ -1,12 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
-// const mysql = require('mysql2')
-
-// let nameSignUp = document.getElementById('nameSignUp');
-// let usernameSignUp = document.getElementById('usernameSignUp');
-// let pass = document.getElementById('passwordSignUp');
-// let submitSignUp = document.getElementById('submitSignUp')
-
-//submitSignUp.addEventListener('click', SingUp)
+//const mysql = require('mysql2')
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -54,6 +47,11 @@ function ventanaProductos() {
     })
 })
 
+ipcMain.on('logOut', (event, args) => {
+  createWindow()
+})
+
+
 let agregar;
 function ventanaAddProductos() { 
     agregar = new BrowserWindow({
@@ -69,9 +67,6 @@ function ventanaAddProductos() {
 
  ipcMain.on('add_product', (event, args) => {
     ventanaAddProductos()
-    // productos.webContents.on('did-finish-load', () => {
-    //    productos.webContents.send('username', args)
-    // })
 })
 
 let order;
@@ -89,36 +84,40 @@ function ventanaOrdenarProductos() {
 
  ipcMain.on('order_product', (event, args) => {
     ventanaOrdenarProductos()
-    // productos.webContents.on('did-finish-load', () => {
-    //    productos.webContents.send('username', args)
-    // })
 })
 
 
-//MySQL Connection
+let prov;
+function ventanaProveedores() { 
+    prov = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
 
-// const connection = mysql.createConnection({
-//     host: process.env.HOST,
-//     user: process.env.USER,
-//     password: process.env.PASS,
-//     database: process.env.DATABASE,
-//   });
-  
-//   function SingUp() {
-//     connection
-//       .promise()
-//       .query(
-//         `insert into users
-//                           (name, username, password) 
-//                           values 
-//                           (${nameSignUp.value}, ${usernameSignUp.value}, ${pass.value})`
-//       )
-//       .then(([results, fields]) => {
-//         console.log(results);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }
+    prov.loadFile('./proveedores/proveedores.html')
+ }
 
-  
+ipcMain.on('open_prov', (event, args) => {
+  console.log('click')
+  ventanaProveedores()
+})
+
+let categorias;
+function ventanaCategorias() { 
+  categorias = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
+
+    categorias.loadFile('./categorias/categorias.html')
+ }
+
+ipcMain.on('open_cate', (event, args) => {
+  ventanaCategorias()
+})

@@ -14,8 +14,8 @@
 </head>
 <body>
     <div class="container">
-      <h1>Add new product</h1>
-        <form>
+      <h1>Add new categorie</h1>
+        <form">
           <div class="mb-3">
             <label for="inputID" class="form-label">ID</label>
             <input type="text" disabled class="form-control" id="inputID" >
@@ -25,23 +25,14 @@
               <input type="text" autofocus class="form-control" id="inputName" >
             </div>
             <div class="mb-3">
-                <label for="inputDescription" class="form-label">Description</label>
+                <label for="inputAddress" class="form-label">Description</label>
                 <textarea type="text" class="form-control" id="inputDescription"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="selectCategory">Category</label>
-              <select class="form-select" style="width: 18rem;" aria-label="Categories" id="selectCategory">
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="inputQuantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" id="inputQuantity">
             </div>
             <button type="submit" id="btnAdd" class="btn btn-primary">Save</button>
             <button type="button" id="btnClose" class="btn btn-danger">Cancel</button>
           </form>
     </div>
 
-    <script src="./agregarProductos.js"></script>
+    <script src="./categorias.js"></script>
 </body>
 </html>

@@ -49,7 +49,7 @@
             <form onsubmit="event.preventDefault();">
                 <div class="form-group">
                 <label for="usernameSignIn">Username</label>
-                <input type="text" class="form-control mb-3" id="usernameSignIn" aria-describedby="emailHelp" placeholder="Enter email" required>
+                <input type="text" class="form-control mb-3" id="usernameSignIn" aria-describedby="emailHelp" placeholder="Enter email" required autofocus>
                 </div>
                 <div class="form-group">
                 <label for="passwordSignIn">Password</label>
@@ -59,7 +59,7 @@
             </form>
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <form>
+            <form onsubmit="event.preventDefault();">
                 <div class="form-group">
                     <label for="nameSignUp">Name</label>
                     <input type="text" class="form-control mb-3" id="nameSignUp" aria-describedby="emailHelp" placeholder="Enter your name" required>
@@ -89,5 +89,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="login.js"></script>
+    <script src="../main.js"></script>
   </body>
 </html>

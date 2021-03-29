@@ -1,6 +1,16 @@
 //const { ipcRenderer } = require("electron");
-
 const ipc = require('electron').ipcRenderer;
+  
+const {getConnection} = require('../database')
+
+let nameSignUp = document.getElementById('nameSignUp');
+let usernameSignUp = document.getElementById('usernameSignUp');
+let pass = document.getElementById('passwordSignUp');
+let submitSignUp = document.getElementById('submitSignUp')
+
+submitSignUp.addEventListener('click', SingUp)
+
+
 
 //Validaciones
 let pass1 = document.getElementById('passwordSignUp');
@@ -21,29 +31,25 @@ let submitSignIn = document.getElementById('submitSignIn');
 
 submitSignIn.addEventListener('click', SignIn);
 
-function SignIn() {
-  usernames = ['admin', 'test'];
-  passwords = ['admin123', 'test12345'];
+
+async function consultarUsuario(usuario, clave){
+  const connection = await getConnection()
+  const resultado = connection.promise().query('SELECT * FROM users WHERE username = ? And password = ?', [usuario, clave])
+  .then(([results, fields]) => {
+    return results;
+  }).catch(err => {
+    console.log(err)
+  })
+  return resultado
+}
+
+async function SignIn() {
   let username = document.getElementById('usernameSignIn').value;
   let pass = document.getElementById('passwordSignIn').value;
-  var matchUser = false
-  var matchPass = false
 
-  usernames.forEach((element) => {
-    if (username == element) {
-      matchUser = true
-      return matchUser
-    } 
-  });
+  const match = await consultarUsuario(username, pass)
 
-  passwords.forEach((element) => {
-    if (pass == element) {
-      matchPass = true
-      return matchPass
-    } 
-  });
-
-  if (matchUser && matchPass) {
+  if (match.length > 0) {
       console.log('success')
       ipc.send('login_valido', [username])
       window.close()
@@ -51,3 +57,19 @@ function SignIn() {
       alert("Username or password incorrect")
   }
 }
+
+function SingUp() {
+  connection.promise().query("INSERT INTO users(nombre, username, password) VALUES(?,?,?)", [nameSignUp.value, usernameSignUp.value, pass.value])
+    .then(([results, fields]) => {
+      console.log(results);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+  // connection.query('SELECT * FROM users',
+  // function(err, results, fields){
+  //   console.log(results)
+  // })
+  
