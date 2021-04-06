@@ -70,6 +70,17 @@ async function categorias(id) {
     return categoria
  }
 
+ async function pedidos(id){
+    let pedido = await connection.promise().query("SELECT cantidad FROM pedidos WHERE idProducto = ?", [id])
+    .then(([results, fields]) => {
+        return results
+    }).catch(err => {
+        console.log(err)
+    })
+
+    return pedido
+ }
+
   //Renderizando Productos
 async function renderizarProductos(){
     let productosDiv = document.getElementById('productos')
@@ -78,6 +89,12 @@ async function renderizarProductos(){
     for(let i = 0; i < lista.length; i++){
 
         let categoria = await categorias(lista[i].idCategoria)
+        let pedido = await pedidos(lista[i].id)
+        if(pedido.length > 0) {
+            pedido = pedido[0].cantidad
+        }else{
+            pedido = 0
+        }
         let producto = document.createElement('div')
         
         producto.className = "card ml-2" 
@@ -89,7 +106,7 @@ async function renderizarProductos(){
                 <h5 class="card-title">${lista[i].nombre}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">${categoria[0].nombre}</h6>
                 <p class="card-text">${lista[i].descripcion}</p>
-                <p class="card-text">Existencia: ${lista[i].existencia}</p>
+                <p class="card-text">Existencia: ${lista[i].existencia} (${pedido})</p>
                 <button class="btn btn-primary">Edit</button>
                 <button class="btn btn-danger deleteProd">Delete</button>
                 </div>
