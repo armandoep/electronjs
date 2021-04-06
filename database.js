@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'login-electron'
+    database: 'login_electron'
   });
 
   function getConnection() {

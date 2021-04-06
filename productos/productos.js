@@ -87,7 +87,7 @@ async function renderizarProductos(){
             `
                 <div class="card-body">
                 <h5 class="card-title">${lista[i].nombre}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${categoria[0].name}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">${categoria[0].nombre}</h6>
                 <p class="card-text">${lista[i].descripcion}</p>
                 <p class="card-text">Existencia: ${lista[i].existencia}</p>
                 <button class="btn btn-primary">Edit</button>

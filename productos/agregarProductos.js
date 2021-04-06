@@ -48,7 +48,7 @@ async function categories() {
     for (let i = 0; i < categorias.length; i++) {
        let cat = document.createElement("option")
        cat.value = categorias[i].id
-       cat.innerHTML = categorias[i].name
+       cat.innerHTML = categorias[i].nombre
        selectCategory.appendChild(cat)
     }
 }

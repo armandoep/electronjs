@@ -12,7 +12,7 @@ btnClose.addEventListener('click', function(){
 })
 
 function addCat() {
-    connection.promise().query("INSERT INTO categorias(name, descripcion) VALUES (?,?)", [inputName.value, inputDescription.value])
+    connection.promise().query("INSERT INTO categorias(nombre, descripcion) VALUES (?,?)", [inputName.value, inputDescription.value])
     .then(([results, fields]) => {
         console.log(results);
         alert("Categorie added successfully")

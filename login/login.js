@@ -1,5 +1,6 @@
 //const { ipcRenderer } = require("electron");
 const ipc = require('electron').ipcRenderer;
+const bcrypt = require('bcrypt')
   
 const {getConnection} = require('../database')
 
@@ -34,12 +35,10 @@ submitSignIn.addEventListener('click', SignIn);
 
 async function consultarUsuario(usuario, clave){
   const connection = await getConnection()
-  const resultado = connection.promise().query('SELECT * FROM users WHERE username = ? And password = ?', [usuario, clave])
-  .then(([results, fields]) => {
-    return results;
-  }).catch(err => {
-    console.log(err)
-  })
+  const resultado = await connection.promise().query('SELECT username, password FROM users WHERE username = ?', [usuario])
+  
+
+  console.log(resultado)
   return resultado
 }
 
@@ -48,7 +47,7 @@ async function SignIn() {
   let pass = document.getElementById('passwordSignIn').value;
 
   const match = await consultarUsuario(username, pass)
-
+  console.log(match)
   if (match.length > 0) {
       console.log('success')
       ipc.send('login_valido', [username])
@@ -58,18 +57,15 @@ async function SignIn() {
   }
 }
 
-function SingUp() {
-  connection.promise().query("INSERT INTO users(nombre, username, password) VALUES(?,?,?)", [nameSignUp.value, usernameSignUp.value, pass.value])
-    .then(([results, fields]) => {
-      console.log(results);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+async function SingUp() {
+  const connection = await getConnection()
+  bcrypt.hash(pass.value, 10).then(pass_hash => {
+    connection.promise().query("INSERT INTO users(nombre, username, password) VALUES(?,?,?)", [nameSignUp.value, usernameSignUp.value, pass_hash])
+      .then(([results, fields]) => {
+        console.log(results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }).catch(e => console.log(e))
 }
-
-  // connection.query('SELECT * FROM users',
-  // function(err, results, fields){
-  //   console.log(results)
-  // })
-  
